@@ -1,4 +1,5 @@
 import pandas as pd
+from eqUtils import *
 
 # new data from usgs
 df = pd.read_csv('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.csv')
@@ -6,6 +7,10 @@ df = pd.read_csv('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_
 # Filter new events by location
 #   radius, km  -- 100 km is currently the radius in the libcomcat query
 radius = 100
+# lindsborg -- currently used in libcomcat query
+centerLat = 38.5735
+centerLong = -97.6745
+
 df_filtered = df.loc[gcDistpd(centerLat, centerLong, df)<= radius]
 
 # new index to match history, central time
