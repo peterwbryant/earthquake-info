@@ -7,7 +7,7 @@ from libcomcat.search import search
 centerLat = 38.5735
 centerLong = -97.6745
 # radius, km
-radius = 30
+radius = 100
 
 # get events from libcomcat
 summary_events = search(starttime=datetime(1994, 1, 17, 12, 30), endtime=datetime(2021, 12, 18, 12, 35),
