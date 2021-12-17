@@ -24,9 +24,9 @@ new_time_index = pd.DatetimeIndex(pd.to_datetime(sum_df['time'] )).tz_localize('
 longitude = sum_df['longitude'].to_numpy()
 latitude = sum_df['latitude'].to_numpy()
 magnitude = sum_df['magnitude'].to_numpy()
-location_st = sum_df['location'].to_numpy()
+#location_st = sum_df['location'].to_numpy()
 
-data_to_save = {'latitude':latitude, 'longitude':longitude, 'magnitude':magnitude, 'location string':location_st}
+data_to_save = {'latitude':latitude, 'longitude':longitude, 'magnitude':magnitude}
 eq_data = pd.DataFrame(data=data_to_save,
                        index=new_time_index)
 
