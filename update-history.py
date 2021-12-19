@@ -33,4 +33,4 @@ hist_df = pd.read_pickle('historyDF.pkl')
 newdf = pd.merge(hist_df, eq_data_new, on=['time','latitude','longitude','magnitude'], how='outer')
 
 # replace history file
-newdf.to_pickle('./historyDF.pkl')
+newdf.sort_values(by=['time']).to_pickle('./historyDF.pkl')
