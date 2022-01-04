@@ -10,7 +10,7 @@ centerLong = -97.6745
 radius = 100
 
 # get events from libcomcat
-summary_events = search(starttime=datetime(1994, 1, 17, 12, 30), endtime=datetime(2021, 12, 18, 12, 35),
+summary_events = search(starttime=datetime(2014, 1, 17, 12, 30), endtime=datetime(2021, 12, 30, 12, 35),
                    maxradiuskm=radius, latitude=centerLat, longitude=centerLong)
 sum_df = get_summary_data_frame(summary_events)
 

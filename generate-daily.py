@@ -51,6 +51,7 @@ plotlong = hist_df['longitude'].to_numpy()
 plotmag = hist_df['magnitude'].to_numpy()
 
 fig_map = plt.figure(figsize=(10, 10))
+fig_map.patch.set_alpha(0.0)
 m = Basemap(projection='lcc', resolution='h',
             lat_0=38.5735, lon_0=-97.6745,
             width=1.05E6, height=1.2E6)
@@ -114,6 +115,7 @@ y3 = year_count['magnitude']
 
 # plot
 fig, host = plt.subplots(figsize=(8,6))
+fig.patch.set_alpha(0.0)
 rt_ax = host.twinx()
 rt_ax2 = host.twinx()
 
