@@ -10,12 +10,9 @@ centerLong = -97.6745
 radius = 100
 
 # get events from libcomcat
-summary_events = search(starttime=datetime(2014, 1, 17, 12, 30), endtime=datetime(2021, 12, 30, 12, 35),
+summary_events = search(starttime=datetime(2014, 1, 17, 12, 30), endtime=datetime.now(),
                    maxradiuskm=radius, latitude=centerLat, longitude=centerLong)
 sum_df = get_summary_data_frame(summary_events)
-
-# rename magnitude
-#sum_df.rename(columns={'magnitude': 'mag'}, inplace=True)
 
 # Create new dataframe with only the data to save
 #   convert to central time and make time the index
