@@ -39,13 +39,24 @@ newdf.to_pickle('./infoDF.pkl')
 
 # write html table
 timeOnly = newdf.index.round('S').map(lambda t: t.strftime('%H:%M:%S')).to_numpy()
-#newdf['time (US Central)']=timeOnly
+
 newdf = newdf.assign(tempTime=timeOnly)
 newdf.index = newdf.index.round('S').map(lambda t: t.strftime('%Y-%m-%d'))
 newdf.reset_index(inplace=True)
 newdf.rename(columns={'time':'date', 'tempTime':'time (US Central)'}, inplace=True)
 newdf = newdf[['date', 'time (US Central)', 'magnitude', 'location', 'USGS event page']]
-#newdf['USGS event page'] = '<a href="' + newdf['USGS event page'].astype(str) +'"> ' \
-#                           + newdf['USGS event page'].astype(str) + '</a>'
+
 # escape=False to write < and > correctly in output file
-newdf.iloc[-30:].to_html('eq-table.html', index=False, escape=False)
+pd.set_option('colheader_justify', 'center')
+
+html_string = '''
+<html>
+  <head><title>30 Most Recent Events within 100 km</title></head>
+  <link rel="stylesheet" type="text/css" href="df_style.css"/>
+  <body>
+    {table}
+  </body>
+</html>.
+'''
+with open('eq-table.html', 'w') as f:
+    f.write(html_string.format(table=newdf[-30:].to_html(classes='mystyle', index=False, escape=False)))
