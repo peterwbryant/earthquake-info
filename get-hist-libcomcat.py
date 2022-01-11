@@ -26,12 +26,13 @@ magnitude = sum_df['magnitude'].to_numpy()
 # info table
 location_st = sum_df['location'].to_numpy()
 url_st = sum_df['url'].to_numpy()
+href_st = ['<a href="' + x +'"> ' + x + '</a>' for x in url_st]
 
 data_to_save = {'latitude':latitude, 'longitude':longitude, 'magnitude':magnitude}
 eq_data = pd.DataFrame(data=data_to_save,
                        index=new_time_index)
 
-info_to_save = {'magnitude':magnitude, 'location':location_st, 'USGS event page':url_st}
+info_to_save = {'magnitude':magnitude, 'location':location_st, 'USGS event page':href_st, 'USGS event page raw':url_st}
 eq_info = pd.DataFrame(data=info_to_save,
                        index=new_time_index)
 

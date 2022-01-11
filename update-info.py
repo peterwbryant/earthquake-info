@@ -20,7 +20,7 @@ magnitude = df_filtered['mag'].to_numpy()
 location_st = df_filtered['place'].to_numpy()
 url_st = ['Not available as of posting'] * len(magnitude)
 
-info_to_update = {'magnitude':magnitude, 'location':location_st, 'USGS event page':url_st}
+info_to_update = {'magnitude':magnitude, 'location':location_st, 'USGS event page':url_st, 'USGS event page raw':url_st}
 eq_info_new = pd.DataFrame(data=info_to_update,
                        index=time_index)
 
@@ -39,10 +39,13 @@ newdf.to_pickle('./infoDF.pkl')
 
 # write html table
 timeOnly = newdf.index.round('S').map(lambda t: t.strftime('%H:%M:%S')).to_numpy()
-newdf['time (US Central)']=timeOnly
+#newdf['time (US Central)']=timeOnly
 newdf = newdf.assign(tempTime=timeOnly)
 newdf.index = newdf.index.round('S').map(lambda t: t.strftime('%Y-%m-%d'))
 newdf.reset_index(inplace=True)
 newdf.rename(columns={'time':'date', 'tempTime':'time (US Central)'}, inplace=True)
 newdf = newdf[['date', 'time (US Central)', 'magnitude', 'location', 'USGS event page']]
-newdf.iloc[-30:].to_html('eq-table.html', index=False)
+#newdf['USGS event page'] = '<a href="' + newdf['USGS event page'].astype(str) +'"> ' \
+#                           + newdf['USGS event page'].astype(str) + '</a>'
+# escape=False to write < and > correctly in output file
+newdf.iloc[-30:].to_html('eq-table.html', index=False, escape=False)
