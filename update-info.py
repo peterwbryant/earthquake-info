@@ -38,7 +38,11 @@ newdf = pd.concat([info_df, eq_info_new]).sort_values(by=['time'])
 newdf.to_pickle('./infoDF.pkl')
 
 # write html table
-newdf.index = newdf.index.round('S').map(lambda t: t.strftime('%Y-%m-%d %H:%M:%S'))
+timeOnly = newdf.index.round('S').map(lambda t: t.strftime('%H:%M:%S')).to_numpy()
+newdf['time (US Central)']=timeOnly
+newdf = newdf.assign(tempTime=timeOnly)
+newdf.index = newdf.index.round('S').map(lambda t: t.strftime('%Y-%m-%d'))
 newdf.reset_index(inplace=True)
-newdf.rename(columns={'time':'time (US central)'}, inplace=True)
-newdf.iloc[-20:].to_html('eq-table.html', index=False)
+newdf.rename(columns={'time':'date', 'tempTime':'time (US Central)'}, inplace=True)
+newdf = newdf[['date', 'time (US Central)', 'magnitude', 'location', 'USGS event page']]
+newdf.iloc[-30:].to_html('eq-table.html', index=False)
