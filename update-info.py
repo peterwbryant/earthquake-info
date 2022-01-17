@@ -59,4 +59,4 @@ html_string = '''
 </html>.
 '''
 with open('eq-table.html', 'w') as f:
-    f.write(html_string.format(table=newdf[-30:].to_html(classes='mystyle', index=False, escape=False)))
+    f.write(html_string.format(table=newdf[-30:].sort_index(ascending=False).to_html(classes='mystyle', index=False, escape=False)))
